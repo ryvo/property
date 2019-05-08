@@ -1,0 +1,76 @@
+<h2>Buildings management</h2>
+
+<p-button label="New building" icon="pi pi-plus" (onClick)="startNewBuilding()"></p-button>
+
+<div class="p-grid list-of-buildings">
+  <div *ngFor="let building of buildings" class="p-col-12 p-sm-12 p-md-6 p-lg-4">
+    <p-card>
+      <ul>
+        <li>{{building.address.streetName}} {{building.address.registryNumber}} / {{building.address.houseNumber}}</li>
+        <li>{{building.address.postalCode}}, {{building.address.townName}}</li>
+        <li>{{building.address.countryName}}</li>
+      </ul>
+      <button pButton type="button" label="Manage" icon="pi pi-check" class="ui-button-success"></button>
+    </p-card>
+  </div>
+</div>
+
+<!--
+    <p-card *ngFor="let building of buildings">
+      <p>{{building.address.streetName}} {{building.address.registryNumber}} / {{building.address.houseNumber}}</p>
+      <p>{{building.address.townName}}</p>
+      <p>{{building.address.postalCode}}</p>
+      <p>{{building.address.countryName}}</p>
+      <p-footer>
+        Footer content here
+      </p-footer>
+    </p-card>-->
+
+<p-dialog header="New building" class="new-building-dialog" [(visible)]="displayNewBuildingDialog" [style]="{width: '640px', height: 'auto'}" [resizable]="false" modal="true" [closable]="false">
+  <div *ngIf="displayNewBuildingDialog" class="new-building-form">
+    <div class="p-grid p-justify-center">
+      <div class="p-col-12 p-md-6">
+          <span class="ui-float-label">
+            <input id="new-building-street-name" type="text" size="30" pInputText [(ngModel)]="newBuilding.streetName">
+            <label for="new-building-street-name">Street name</label>
+          </span>
+      </div>
+      <div class="p-col-12 p-md-3">
+          <span class="ui-float-label">
+            <input id="new-building-house-number" type="text" size="10" pInputText [(ngModel)]="newBuilding.houseNumber">
+            <label for="new-building-house-number">House number</label>
+          </span>
+      </div>
+      <div class="p-col-12 p-md-3">
+          <span class="ui-float-label">
+            <input id="new-building-registry-number" type="text" size="10" pInputText [(ngModel)]="newBuilding.registryNumber">
+            <label for="new-building-registry-number">Registry number</label>
+          </span>
+      </div>
+      <div class="p-col-12 p-md-5">
+          <span class="ui-float-label">
+            <input id="new-building-town-name" type="text" size="30" pInputText [(ngModel)]="newBuilding.townName">
+            <label for="new-building-town-name">Town name</label>
+          </span>
+      </div>
+      <div class="p-col-12 p-md-3">
+          <span class="ui-float-label">
+            <input id="new-building-postal-code" type="text" size="30" pInputText [(ngModel)]="newBuilding.postalCode">
+            <label for="new-building-postal-code">Postal code</label>
+          </span>
+      </div>
+      <div class="p-col-12 p-md-4">
+          <span class="ui-float-label">
+            <input id="new-building-country-name" type="text" size="30" pInputText [(ngModel)]="newBuilding.countryName">
+            <label for="new-building-country-name">Country name</label>
+          </span>
+      </div>
+      <div class="p-col-12 p-md-2">
+        <p-button label="Create" icon="pi pi-check" class="ui-button-success" (onClick)="submitNewBuilding()"></p-button>
+      </div>
+      <div class="p-col-12 p-md-2">
+        <p-button label="Cancel" icon="pi pi-times" class="ui-button-danger" (onClick)="cancelNewBuilding()"></p-button>
+      </div>
+    </div>
+  </div>
+</p-dialog>
