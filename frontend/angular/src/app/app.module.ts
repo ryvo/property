@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -24,11 +24,16 @@ import { CardModule } from 'primeng/card';
 import { MessageService } from "primeng/api";
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { LoaderComponent } from './components/loader-component/loader.component';
+import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderService } from "./services/loader.service";
 import { HttpService } from "./services/http.service";
 import { HttpHandler } from "@angular/common/http";
 import { httpServiceFactory } from "./factories/http-service.factory";
+import { ApiErrorInterceptor } from "./interceptors/api-error.interceptor";
+import { BuildingComponent } from './components/building/building.component';
+import { RouterModule } from "@angular/router";
+import { routes } from "./routes";
+
 
 // Relates to FontAwesome
 library.add(fas, far);
@@ -38,13 +43,18 @@ library.add(fas, far);
     AppComponent,
     BreadcrumbComponent,
     PortfolioComponent,
-    LoaderComponent
+    LoaderComponent,
+    BuildingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    RouterModule.forRoot(
+      routes,
+      { enableTracing: true } // For debugging purposes
+    ),
     FontAwesomeModule,
     BrowserAnimationsModule,
     ButtonModule,
@@ -62,6 +72,11 @@ library.add(fas, far);
       provide: HttpService,
       useFactory: httpServiceFactory,
       deps: [HttpHandler, LoaderService]
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiErrorInterceptor,
+      multi: true
     },
     MessageService,
     ApiService,

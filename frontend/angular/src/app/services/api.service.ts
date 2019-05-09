@@ -36,7 +36,15 @@ export class ApiService {
     return this.sendRequest<Building[]>('get', '/api/v1/buildings');
   }
 
-  public createBuilding(building: Building): Observable<Building[]> {
-    return this.sendRequest<Building[]>('post', '/api/v1/buildings', building);
+  public createBuilding(building: Building): Observable<Building> {
+    return this.sendRequest<Building>('post', '/api/v1/buildings', building);
+  }
+
+  public updateBuilding(id: number, building: Building): Observable<Building> {
+    return this.sendRequest<Building>('put', '/api/v1/buildings/' + id, building);
+  }
+
+  public getBuilding(id: number): Observable<Building> {
+    return this.sendRequest<Building>('get', '/api/v1/buildings/' + id);
   }
 }

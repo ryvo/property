@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from "../../services/api.service";
 import { Observable } from "rxjs/internal/Observable";
 import { Building } from "../../models/building.model";
+import { Router } from "@angular/router";
+import * as _ from "lodash";
 
 @Component({
   selector: 'app-portfolio',
@@ -10,11 +12,11 @@ import { Building } from "../../models/building.model";
 })
 export class PortfolioComponent implements OnInit {
 
-  private newBuilding: Building = undefined;
-  private displayNewBuildingDialog: boolean = false;
+  private editedBuilding: Building = undefined;
+  private buildingFormVisible: boolean = false;
   private buildings: Building[] = [];
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit() {
     this.getListOfBuildings();
@@ -23,37 +25,55 @@ export class PortfolioComponent implements OnInit {
   getListOfBuildings(): Observable<Building[]> {
     let $buildings = this.apiService.getListOfBuildings();
     $buildings.subscribe((response: Building[]) => {
-      console.log(response);
       this.buildings = response;
     });
     return $buildings;
   }
 
-  startNewBuilding() {
-    this.newBuilding = new Building();
-    this.displayNewBuildingDialog = true;
+  openNewBuildingForm() {
+    this.editedBuilding = new Building();
+    this.buildingFormVisible = true;
   }
 
-  cancelNewBuilding() {
-    this.displayNewBuildingDialog = false;
-    this.newBuilding = undefined;
+  openBuildingForm(building: Building) {
+    this.editedBuilding = _.clone(building);
+    this.buildingFormVisible = true;
   }
 
-  submitNewBuilding() {
-    this.displayNewBuildingDialog = false;
-    this.apiService.createBuilding(this.newBuilding).subscribe(
+  cancelBuildingForm() {
+    this.buildingFormVisible = false;
+    this.editedBuilding = undefined;
+  }
+
+  submitBuildingForm() {
+    this.buildingFormVisible = false;
+
+    let observable: Observable<Building>;
+    if (this.isNew(this.editedBuilding)) {
+      observable = this.apiService.createBuilding(this.editedBuilding);
+    } else {
+      let id = this.editedBuilding.id;
+      let building = _.clone(this.editedBuilding);
+      delete building.id;
+      observable = this.apiService.updateBuilding(id, building);
+    }
+
+    observable.subscribe(
       (response) => {
-        this.newBuilding = undefined;
-        this.buildings = response;
+        this.editedBuilding = undefined;
         this.getListOfBuildings();
       },
       (error) => {
-        this.displayNewBuildingDialog = true;
+        this.buildingFormVisible = true;
       }
     );
   }
 
-  addressLine1(building: Building) {
+  manageBuilding(building: Building) {
+    this.router.navigate(['/buildings', building.id]);
+  }
 
+  isNew(building: Building) {
+    return typeof building !== 'undefined' && typeof building.id === 'undefined';
   }
 }

@@ -11,6 +11,9 @@ ul {
 }
 
 .list-of-buildings {
+  ::ng-deep .ui-card:hover {
+    background-color: #dcecf8;
+  }
   button {
     width: 100%;
   }

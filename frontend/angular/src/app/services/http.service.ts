@@ -27,7 +27,7 @@ export class HttpService extends HttpClient {
 
     let observable: Observable<T> = this.request<T>(method, url, options).pipe(
       shareReplay(),
-      delay(50000),
+//      delay(50000),
       catchError((error: HttpErrorResponse) => {
         return throwError(error);
       })

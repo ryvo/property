@@ -5,3 +5,9 @@ body {
   max-width: $page-width;
   margin:0 auto 0 auto;
 }
+
+.required,
+.required:hover {
+  border: 1px solid #ffdada !important;
+  background-color: #fff4f4 !important;
+}
