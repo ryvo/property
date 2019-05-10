@@ -3,12 +3,10 @@ package cz.ryvo.propertymanager.backend.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.LAZY;
 
 @Getter
 @Setter
@@ -16,8 +14,12 @@ import static javax.persistence.EnumType.STRING;
 @Table
 public class BuildingUnit extends DomainObject {
 
+  @ManyToOne(fetch = LAZY)
+  @JoinColumn(name = "building_id")
+  private Building building;
+
   @Column(nullable = false)
-  private String number;
+  private String name;
 
   @Enumerated(STRING)
   @Column(nullable = false)

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { HttpHandler } from "@angular/common/http";
-import {LoaderService} from "./loader.service";
-import {catchError, delay, shareReplay} from "rxjs/operators";
-import {Observable} from "rxjs/internal/Observable";
-import {throwError} from "rxjs/internal/observable/throwError";
-import {PartialObserver} from "rxjs/internal/types";
+import { LoaderService } from "./loader.service";
+import { catchError, shareReplay } from "rxjs/operators";
+import { Observable } from "rxjs/internal/Observable";
+import { throwError } from "rxjs/internal/observable/throwError";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +17,7 @@ export class HttpService extends HttpClient {
 
   public sendRequest<T>(method: string, url: string, body?: any): Observable<T> {
     let options = {};
+
     if (typeof body != 'undefined') {
       options['body'] = body;
     }

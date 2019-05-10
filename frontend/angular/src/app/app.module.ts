@@ -10,9 +10,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { AppComponent } from './app.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { PortfolioComponent } from './components/portfolio/portfolio.component';
+import { BuildingListComponent } from './buildings/building-list/building-list.component';
 import { ApiService } from './services/api.service';
-import { BuildingService } from "./services/building.service";
+import { BuildingsService } from "./buildings/buildings.service";
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
@@ -30,9 +30,10 @@ import { HttpService } from "./services/http.service";
 import { HttpHandler } from "@angular/common/http";
 import { httpServiceFactory } from "./factories/http-service.factory";
 import { ApiErrorInterceptor } from "./interceptors/api-error.interceptor";
-import { BuildingComponent } from './components/building/building.component';
+import { BuildingDashboardComponent } from './buildings/building-dashboard/building-dashboard.component';
 import { RouterModule } from "@angular/router";
 import { routes } from "./routes";
+import { OwnerEditorComponent } from './owners/owner-editor/owner-editor.component';
 
 
 // Relates to FontAwesome
@@ -42,9 +43,10 @@ library.add(fas, far);
   declarations: [
     AppComponent,
     BreadcrumbComponent,
-    PortfolioComponent,
+    BuildingListComponent,
     LoaderComponent,
-    BuildingComponent
+    BuildingDashboardComponent,
+    OwnerEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,7 @@ library.add(fas, far);
     },
     MessageService,
     ApiService,
-    BuildingService
+    BuildingsService
   ],
   bootstrap: [AppComponent]
 })

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 class BuildingConverterImpl implements BuildingConverter {
 
+  @Override
   public BuildingDTO toDTO(@NonNull Building entity) {
     BuildingDTO dto = new BuildingDTO();
     dto.setId(entity.getId());
@@ -21,6 +22,7 @@ class BuildingConverterImpl implements BuildingConverter {
     return dto;
   }
 
+  @Override
   public Building toEntity(@NonNull BuildingDTO dto) {
     Address address = new Address();
     address.setHouseNumber(dto.getHouseNumber());

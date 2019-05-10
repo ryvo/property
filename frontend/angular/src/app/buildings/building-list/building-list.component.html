@@ -1,0 +1,80 @@
+<h2>List of buildings</h2>
+
+<p-button label="New building" icon="pi pi-plus" (onClick)="openNewBuildingForm()"></p-button>
+
+<div *ngIf="$buildings | async as buildings" class="p-grid list-of-buildings">
+
+  <div *ngFor="let building of buildings" class="p-col-12 p-sm-12 p-md-6 p-lg-4">
+    <p-card>
+      <ul>
+        <li>{{building.streetName}} {{building.registryNumber}} / {{building.houseNumber}}</li>
+        <li>{{building.postalCode}}, {{building.townName}}</li>
+        <li>{{building.countryName}}</li>
+      </ul>
+      <div class="p-grid">
+        <div class="p-col-6">
+          <button pButton type="button" label="Edit" icon="pi pi-pencil" class="ui-button-primary" (click)="openBuildingForm(building)"></button>
+        </div>
+        <div class="p-col-6">
+          <button pButton type="button" label="Manage" icon="pi pi-list" class="ui-button-success" (click)="manageBuilding(building)"></button>
+        </div>
+      </div>
+    </p-card>
+  </div>
+
+  <p-dialog class="new-building-dialog" [(visible)]="buildingFormVisible" [style]="{width: '640px', height: 'auto'}" [resizable]="false" [modal]="true" [draggable]="false" [closable]="false">
+    <p-header>
+      <span *ngIf="isNew(editedBuilding); then new_building else edit_building"></span>
+      <ng-template #new_building>New building</ng-template>
+      <ng-template #edit_building>Edit building</ng-template>
+    </p-header>
+    <div *ngIf="buildingFormVisible" class="new-building-form">
+      <div class="p-grid p-justify-center">
+        <div class="p-col-12 p-md-6">
+          <span class="ui-float-label">
+            <input id="new-building-street-name" type="text" size="30" class="required" pInputText [(ngModel)]="editedBuilding.streetName">
+            <label for="new-building-street-name">Street name</label>
+          </span>
+        </div>
+        <div class="p-col-12 p-md-3">
+          <span class="ui-float-label">
+            <input id="new-building-house-number" type="text" size="10" class="required" pInputText [(ngModel)]="editedBuilding.houseNumber">
+            <label for="new-building-house-number">House number</label>
+          </span>
+        </div>
+        <div class="p-col-12 p-md-3">
+          <span class="ui-float-label">
+            <input id="new-building-registry-number" type="text" size="10" pInputText [(ngModel)]="editedBuilding.registryNumber">
+            <label for="new-building-registry-number">Registry number</label>
+          </span>
+        </div>
+        <div class="p-col-12 p-md-5">
+          <span class="ui-float-label">
+            <input id="new-building-town-name" type="text" size="30" class="required" pInputText [(ngModel)]="editedBuilding.townName">
+            <label for="new-building-town-name">Town name</label>
+          </span>
+        </div>
+        <div class="p-col-12 p-md-3">
+          <span class="ui-float-label">
+            <input id="new-building-postal-code" type="text" size="30" class="required" pInputText [(ngModel)]="editedBuilding.postalCode">
+            <label for="new-building-postal-code">Postal code</label>
+          </span>
+        </div>
+        <div class="p-col-12 p-md-4">
+          <span class="ui-float-label">
+            <input id="new-building-country-name" type="text" size="30" pInputText [(ngModel)]="editedBuilding.countryName">
+            <label for="new-building-country-name">Country name</label>
+          </span>
+        </div>
+        <div class="p-col-12 p-md-2">
+          <p-button *ngIf="isNew(editedBuilding)" label="Create" icon="pi pi-check" class="ui-button-danger" (onClick)="submitBuildingForm()"></p-button>
+          <p-button *ngIf="!isNew(editedBuilding)" label="Save" icon="pi pi-check" class="ui-button-danger" (onClick)="submitBuildingForm()"></p-button>
+        </div>
+        <div class="p-col-12 p-md-2">
+          <p-button label="Cancel" icon="pi pi-times" class="ui-button-danger" (onClick)="cancelBuildingForm()"></p-button>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+
+</div>

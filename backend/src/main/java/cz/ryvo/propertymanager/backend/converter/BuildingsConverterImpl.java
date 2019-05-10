@@ -20,6 +20,7 @@ class BuildingsConverterImpl implements BuildingsConverter {
     this.converter = converter;
   }
 
+  @Override
   public List<BuildingDTO> toDTO(List<Building> domain) {
     return domain.stream().map(converter::toDTO).collect(toList());
   }

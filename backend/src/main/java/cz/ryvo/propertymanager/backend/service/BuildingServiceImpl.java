@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional(readOnly = true)
 @Service
 class BuildingServiceImpl implements BuildingService {
 
@@ -34,7 +33,6 @@ class BuildingServiceImpl implements BuildingService {
     return optional.orElseThrow(() -> new NotFoundException("Building not found"));
   }
 
-  @Transactional
   @Override
   public Building createBuilding(@NonNull Building building) {
     Portfolio portfolio = portfolioService.getPortfolio();
@@ -44,7 +42,6 @@ class BuildingServiceImpl implements BuildingService {
     return building;
   }
 
-  @Transactional
   @Override
   public Building updateBuilding(Long id, Building building) {
     Building persisted = getBuilding(id);

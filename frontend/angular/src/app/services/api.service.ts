@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Building } from '../models/building.model';
+import { Building } from '../buildings/building.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpErrorResponse } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
@@ -32,7 +32,7 @@ export class ApiService {
 */
   }
 
-  public getListOfBuildings() {
+  public getBuildings() {
     return this.sendRequest<Building[]>('get', '/api/v1/buildings');
   }
 

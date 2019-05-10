@@ -18,8 +18,7 @@ public class Building extends DomainObject {
   @Embedded
   private Address address = new Address();
 
-  @OneToMany(cascade = ALL, orphanRemoval = true)
-  @JoinColumn(name = "buildingId", referencedColumnName = "id", nullable = false)
+  @OneToMany(mappedBy = "building", cascade = ALL, orphanRemoval = true)
   @OrderBy("number ASC")
   private List<BuildingUnit> units = new ArrayList<>();
 }

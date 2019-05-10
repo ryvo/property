@@ -29,5 +29,5 @@ public class Lease extends DomainObject {
 
   @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "tenant_id")
-  private Tenant tenant;
+  private Person tenant;
 }

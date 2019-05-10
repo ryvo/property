@@ -6,6 +6,7 @@ import cz.ryvo.propertymanager.backend.converter.BuildingsConverter;
 import cz.ryvo.propertymanager.backend.domain.Building;
 import cz.ryvo.propertymanager.backend.service.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+@Transactional(readOnly = true)
 @RestController
 @RequestMapping(path = "/api/v1/buildings")
 public class BuildingsEndpoint {
@@ -38,15 +40,22 @@ public class BuildingsEndpoint {
     return buildingsConverter.toDTO(service.listBuildings());
   }
 
+  @Transactional
   @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
   public BuildingDTO createBuilding(@RequestBody @Validated BuildingDTO dto) {
     Building building = buildingConverter.toEntity(dto);
     return buildingConverter.toDTO(service.createBuilding(building));
   }
 
+  @Transactional
   @PutMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
   public BuildingDTO updateBuilding(@PathVariable("id") Long id, @RequestBody @Validated BuildingDTO dto) {
     Building building = buildingConverter.toEntity(dto);
     return buildingConverter.toDTO(service.updateBuilding(id, building));
+  }
+
+  @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
+  public BuildingDTO getBuilding(@PathVariable("id") Long id) {
+    return buildingConverter.toDTO(service.getBuilding(id));
   }
 }
