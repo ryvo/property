@@ -18,6 +18,10 @@ public class BuildingUnit extends DomainObject {
   @JoinColumn(name = "building_id")
   private Building building;
 
+  @ManyToOne(fetch = LAZY)
+  @JoinColumn(name = "owner_id")
+  private Owner owner;
+
   @Column(nullable = false)
   private String name;
 

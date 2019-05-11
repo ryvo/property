@@ -24,7 +24,9 @@ import { CardModule } from 'primeng/card';
 import { MessageService } from "primeng/api";
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DropdownModule } from 'primeng/dropdown';
 import { LoaderComponent } from './components/loader/loader.component';
+import { SpinnerModule } from 'primeng/spinner';
 import { LoaderService } from "./services/loader.service";
 import { HttpService } from "./services/http.service";
 import { HttpHandler } from "@angular/common/http";
@@ -34,6 +36,7 @@ import { BuildingDashboardComponent } from './buildings/building-dashboard/build
 import { RouterModule } from "@angular/router";
 import { routes } from "./routes";
 import { OwnerEditorComponent } from './owners/owner-editor/owner-editor.component';
+import { BuildingUnitEditorComponent } from './building-units/building-unit-editor/building-unit-editor.component';
 
 
 // Relates to FontAwesome
@@ -46,7 +49,8 @@ library.add(fas, far);
     BuildingListComponent,
     LoaderComponent,
     BuildingDashboardComponent,
-    OwnerEditorComponent
+    OwnerEditorComponent,
+    BuildingUnitEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +69,8 @@ library.add(fas, far);
     FieldsetModule,
     PanelModule,
     CardModule,
+    DropdownModule,
+    SpinnerModule,
     ToastModule,
     ProgressSpinnerModule
   ],

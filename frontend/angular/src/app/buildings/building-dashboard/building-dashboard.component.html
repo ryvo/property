@@ -1,28 +1,15 @@
 <div *ngIf="$building | async as building">
   <h2>{{building.streetName}} {{building.registryNumber}} / {{building.houseNumber}}, {{building.townName}}</h2>
-  <p-button label="New building unit" icon="pi pi-plus" (onClick)="openNewBuildingForm()"></p-button>
+  <p-button label="New building unit" icon="pi pi-plus" (onClick)="startNewBuildingUnit()"></p-button>
 
-  <div class="p-grid">
-    <div class="p-col-12 p-md-12 p-lg-6">
-      <p-panel header="Building address">
-        <ul>
-          <li>{{building.streetName}} {{building.registryNumber}} / {{building.houseNumber}}</li>
-          <li>{{building.postalCode}}, {{building.townName}}</li>
-          <li>{{building.countryName}}</li>
-        </ul>
-      </p-panel>
-    </div>
-    <div class="p-col-12 p-md-12 p-lg-6">
-      <p-panel header="Owner">
-        <ul>
-          <li>Jméno</li>
-          <li>Ulice</li>
-          <li>Město</li>
-          <li>Země</li>
-        </ul>
-      </p-panel>
-    </div>
-  </div>
+  <building-unit-editor
+    [buildingId]="buildingId"
+    [buildingUnit]="editedBuildingUnit"
+    [visible]="buildingUnitEditorVisible"
+    (onCancel)="onCancelBuildingUnitEditor()"
+    (onSave)="onSaveBuildingUnitEditor()">
+  </building-unit-editor>
+
 </div>
 
 <fa-icon [icon]="['far', 'building']" size="1x"></fa-icon>
