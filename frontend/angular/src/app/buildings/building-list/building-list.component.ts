@@ -31,7 +31,7 @@ export class BuildingListComponent implements OnInit {
   }
 
   openBuildingForm(building: Building) {
-    this.editedBuilding = this.buildingService.cloneBuilding(building);
+    this.editedBuilding = BuildingsService.cloneBuilding(building);
     this.buildingFormVisible = true;
   }
 

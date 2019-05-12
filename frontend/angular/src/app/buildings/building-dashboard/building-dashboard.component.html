@@ -1,28 +1,40 @@
 <div *ngIf="$building | async as building">
   <h2>{{building.streetName}} {{building.registryNumber}} / {{building.houseNumber}}, {{building.townName}}</h2>
-  <p-button label="New building unit" icon="pi pi-plus" (onClick)="openNewBuildingForm()"></p-button>
+  <p-button label="New building unit" icon="pi pi-plus" (onClick)="startNewBuildingUnit()"></p-button>
 
-  <div class="p-grid">
-    <div class="p-col-12 p-md-12 p-lg-6">
-      <p-panel header="Building address">
+  <div *ngIf="$buildingUnits | async as buildingUnits">
+    <div *ngFor="let buildingUnit of buildingUnits" class="p-col-12 p-sm-12 p-md-12 p-lg-12">
+      <p-panel>
+        <p-header>
+          <div class="p-grid">
+            <div class="p-col-5">{{buildingUnit.name}}</div>
+            <div class="p-col-4">{{buildingUnit.type}}</div>
+            <div class="p-col-3">Storey {{buildingUnit.storey}}</div>
+          </div>
+        </p-header>
         <ul>
-          <li>{{building.streetName}} {{building.registryNumber}} / {{building.houseNumber}}</li>
-          <li>{{building.postalCode}}, {{building.townName}}</li>
-          <li>{{building.countryName}}</li>
+          <li>{{buildingUnit.area}}</li>
         </ul>
-      </p-panel>
-    </div>
-    <div class="p-col-12 p-md-12 p-lg-6">
-      <p-panel header="Owner">
-        <ul>
-          <li>Jméno</li>
-          <li>Ulice</li>
-          <li>Město</li>
-          <li>Země</li>
-        </ul>
+        <div class="p-grid">
+          <div class="p-col-6">
+            <button pButton type="button" label="Edit" icon="pi pi-pencil" class="ui-button-primary" (click)="openBuildingForm(building)"></button>
+          </div>
+          <div class="p-col-6">
+            <button pButton type="button" label="Manage" icon="pi pi-list" class="ui-button-success" (click)="manageBuilding(building)"></button>
+          </div>
+        </div>
       </p-panel>
     </div>
   </div>
+
+  <building-unit-editor
+    [buildingId]="buildingId"
+    [buildingUnit]="editedBuildingUnit"
+    [visible]="buildingUnitEditorVisible"
+    (onCancel)="onCancelBuildingUnitEditor()"
+    (onSave)="onSaveBuildingUnitEditor()">
+  </building-unit-editor>
+
 </div>
 
 <fa-icon [icon]="['far', 'building']" size="1x"></fa-icon>

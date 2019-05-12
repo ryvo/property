@@ -1,5 +1,8 @@
 HELP.md
-/target/
+backend/target/
+frontend/angular/node_modules
+
+
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###

@@ -21,7 +21,7 @@ export class BuildingsService {
 
   updateBuilding(building: Building): Observable<Building> {
     let id = building.id;
-    let buildingClone = _.clone(building);
+    let buildingClone = BuildingsService.cloneBuilding(building);
     delete buildingClone.id;
     return this.apiService.updateBuilding(id, buildingClone);
   }
@@ -30,7 +30,7 @@ export class BuildingsService {
     return this.apiService.getBuilding(id);
   }
 
-  cloneBuilding(building: Building): Building {
+  static cloneBuilding(building: Building): Building {
     return _.clone(building);
   }
 }

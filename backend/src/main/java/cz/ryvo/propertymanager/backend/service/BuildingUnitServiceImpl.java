@@ -24,7 +24,7 @@ class BuildingUnitServiceImpl implements BuildingUnitService {
   }
 
   @Override
-  public List<BuildingUnit> listBuildings(long buildingId) {
+  public List<BuildingUnit> listBuildingUnits(long buildingId) {
     return service.getBuilding(buildingId).getUnits();
   }
 

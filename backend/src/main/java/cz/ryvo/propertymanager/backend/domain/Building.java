@@ -19,6 +19,5 @@ public class Building extends DomainObject {
   private Address address = new Address();
 
   @OneToMany(mappedBy = "building", cascade = ALL, orphanRemoval = true)
-  @OrderBy("number ASC")
   private List<BuildingUnit> units = new ArrayList<>();
 }

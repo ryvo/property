@@ -11,7 +11,7 @@ class BuildingUnitConverterImpl implements BuildingUnitConverter {
   public BuildingUnitDTO toDTO(BuildingUnit domain) {
     BuildingUnitDTO dto = new BuildingUnitDTO();
     dto.setId(domain.getId());
-    dto.setType(dto.getType());
+    dto.setType(domain.getType());
     dto.setName(domain.getName());
     dto.setStorey(domain.getStorey());
     dto.setArea(domain.getArea());
