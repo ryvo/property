@@ -5,16 +5,16 @@
   <div *ngIf="$buildingUnits | async as buildingUnits">
     <div *ngFor="let buildingUnit of buildingUnits" class="p-col-12 p-sm-12 p-md-12 p-lg-12">
       <p-panel>
-        <p-header>
+        <p-header class="building-unit-header">
           <div class="p-grid">
-            <div class="p-col-5">{{buildingUnit.name}}</div>
-            <div class="p-col-4">{{buildingUnit.type}}</div>
-            <div class="p-col-3">Storey {{buildingUnit.storey}}</div>
+            <div class="p-col-8 name">{{buildingUnit.name}}</div>
+            <div class="p-col-4 type">{{buildingUnit.type}}</div>
           </div>
         </p-header>
-        <ul>
-          <li>{{buildingUnit.area}}</li>
-        </ul>
+        <div class="p-grid">
+          <div class="p-col-12 p-sm-12 p-md-6 name">Storey {{buildingUnit.storey}}</div>
+          <div class="p-col-12 p-sm-12 p-md-6 type">Area {{buildingUnit.area}}</div>
+        </div>
         <div class="p-grid">
           <div class="p-col-6">
             <button pButton type="button" label="Edit" icon="pi pi-pencil" class="ui-button-primary" (click)="openBuildingForm(building)"></button>
@@ -36,5 +36,3 @@
   </building-unit-editor>
 
 </div>
-
-<fa-icon [icon]="['far', 'building']" size="1x"></fa-icon>
