@@ -1,4 +1,4 @@
-package cz.ryvo.propertymanager.backend;
+package cz.ryvo.propertymanager.backend.domain;
 
 import lombok.Getter;
 import lombok.Setter;

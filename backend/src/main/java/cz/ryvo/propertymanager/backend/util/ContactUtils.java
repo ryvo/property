@@ -1,7 +1,6 @@
 package cz.ryvo.propertymanager.backend.util;
 
-import cz.ryvo.propertymanager.backend.Contact;
-import cz.ryvo.propertymanager.backend.domain.Address;
+import cz.ryvo.propertymanager.backend.domain.Contact;
 
 import static java.util.Objects.requireNonNull;
 

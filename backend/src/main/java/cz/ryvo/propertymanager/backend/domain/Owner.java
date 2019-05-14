@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
@@ -19,5 +20,5 @@ public class Owner extends Person {
   private Portfolio portfolio;
 
   @OneToMany(mappedBy = "owner", fetch = LAZY)
-  private List<BuildingUnit> buildingUnits;
+  private List<BuildingUnit> buildingUnits = new ArrayList<>();
 }

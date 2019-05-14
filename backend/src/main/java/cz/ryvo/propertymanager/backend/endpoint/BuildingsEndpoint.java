@@ -49,13 +49,13 @@ public class BuildingsEndpoint {
 
   @Transactional
   @PutMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-  public BuildingDTO updateBuilding(@PathVariable("id") Long id, @RequestBody @Validated BuildingDTO dto) {
+  public BuildingDTO updateBuilding(@PathVariable("id") long id, @RequestBody @Validated BuildingDTO dto) {
     Building building = buildingConverter.toEntity(dto);
     return buildingConverter.toDTO(service.updateBuilding(id, building));
   }
 
   @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
-  public BuildingDTO getBuilding(@PathVariable("id") Long id) {
+  public BuildingDTO getBuilding(@PathVariable("id") long id) {
     return buildingConverter.toDTO(service.getBuilding(id));
   }
 }

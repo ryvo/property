@@ -1,9 +1,19 @@
 package cz.ryvo.propertymanager.backend.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+
+import static javax.persistence.FetchType.LAZY;
+
+@Getter
+@Setter
 @Entity
 @Table
 public class Tenant extends Person {
+
+  @ManyToOne(fetch = LAZY)
+  @JoinColumn(name = "portfolio_id")
+  private Portfolio portfolio;
 }

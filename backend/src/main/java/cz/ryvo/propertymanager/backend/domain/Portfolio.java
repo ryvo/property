@@ -19,8 +19,11 @@ import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 @Table
 public class Portfolio extends DomainObject {
 
-  @OneToMany(mappedBy = "portfolio", fetch = LAZY, cascade = ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "portfolio", fetch = LAZY, orphanRemoval = true)
   private List<Owner> owners = new ArrayList<>();
+
+  @OneToMany(mappedBy = "portfolio", fetch = LAZY, orphanRemoval = true)
+  private List<Tenant> tenants = new ArrayList<>();
 
   @OneToMany(cascade = ALL, orphanRemoval = true)
   @Cascade(SAVE_UPDATE) // TODO How does this work?

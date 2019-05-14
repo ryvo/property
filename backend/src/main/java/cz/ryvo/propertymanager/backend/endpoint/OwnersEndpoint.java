@@ -49,13 +49,13 @@ public class OwnersEndpoint {
 
   @Transactional
   @PutMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-  public PersonDTO updateOwner(@PathVariable("id") Long id, @RequestBody @Validated PersonDTO dto) {
+  public PersonDTO updateOwner(@PathVariable("id") long id, @RequestBody @Validated PersonDTO dto) {
     Owner owner = ownerConverter.toEntity(dto);
     return ownerConverter.toDTO(service.updateOwner(id, owner));
   }
 
   @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
-  public PersonDTO getBuilding(@PathVariable("id") Long id) {
+  public PersonDTO getBuilding(@PathVariable("id") long id) {
     return ownerConverter.toDTO(service.getOwner(id));
   }
 }

@@ -1,6 +1,5 @@
 package cz.ryvo.propertymanager.backend.domain;
 
-import cz.ryvo.propertymanager.backend.Contact;
 import lombok.Getter;
 import lombok.Setter;
 
