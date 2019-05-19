@@ -16,7 +16,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Transactional(readOnly = true)
 @RestController
-@RequestMapping(path = "/api/v1/buildings/{buildingId}/units")
+@RequestMapping(path = "/api/v1")
 public class BuildingUnitsEndpoint {
 
   private final BuildingUnitConverter buildingUnitConverter;
@@ -33,26 +33,26 @@ public class BuildingUnitsEndpoint {
     this.buildingUnitsConverter = buildingUnitsConverter;
   }
 
-  @GetMapping(produces = APPLICATION_JSON_VALUE)
+  @GetMapping(path = "/buildings/{buildingId}/units", produces = APPLICATION_JSON_VALUE)
   public List<BuildingUnitDTO> listBuildingUnits(@PathVariable("buildingId") Long id) {
     return buildingUnitsConverter.toDTO(service.listBuildingUnits(id));
   }
 
   @Transactional
-  @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+  @PostMapping(path = "/buildings/{buildingId}/units", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
   public BuildingUnitDTO createBuildingUnit(@PathVariable("buildingId") Long id, @RequestBody @Validated BuildingUnitDTO dto) {
     BuildingUnit unit = buildingUnitConverter.toEntity(dto);
     return buildingUnitConverter.toDTO(service.createBuildingUnit(id, unit));
   }
 
   @Transactional
-  @PutMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+  @PutMapping(path = "/building-units/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
   public BuildingUnitDTO updateBuildingUnit(@PathVariable("id") long id, @RequestBody @Validated BuildingUnitDTO dto) {
     BuildingUnit unit = buildingUnitConverter.toEntity(dto);
     return buildingUnitConverter.toDTO(service.updateBuildingUnit(id, unit));
   }
 
-  @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
+  @GetMapping(path = "/building-units/{id}", produces = APPLICATION_JSON_VALUE)
   public BuildingUnitDTO getBuildingUnit(@PathVariable("id") long id) {
     return buildingUnitConverter.toDTO(service.getBuildingUnit(id));
   }

@@ -1,15 +1,18 @@
 package cz.ryvo.propertymanager.backend.api;
 
 import cz.ryvo.propertymanager.backend.domain.PersonType;
+import cz.ryvo.propertymanager.backend.validation.constraint.ValidPerson;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
+@ValidPerson
 @Getter
 @Setter
-public class PersonDTO {
+public class PersonDTO extends ApiObject {
 
-  private Long id;
-
+  @NotNull
   private PersonType type;
 
   private String firstName;

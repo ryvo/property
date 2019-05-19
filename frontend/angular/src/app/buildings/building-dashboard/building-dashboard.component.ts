@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import { Building } from "../building.model";
 import {switchMap, tap} from "rxjs/operators";
 import { Observable } from "rxjs/internal/Observable";
@@ -28,6 +28,7 @@ export class BuildingDashboardComponent implements OnInit {
   constructor(
     private buildingService: BuildingsService,
     private buildingUnitsService: BuildingUnitsService,
+    private router: Router,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -64,5 +65,9 @@ export class BuildingDashboardComponent implements OnInit {
     this.buildingUnitEditorVisible = false;
     this.editedBuildingUnit = undefined;
     this.fetchBuildingUnits();
+  }
+
+  manageLeases(buildingUnitId: number) {
+    this.router.navigate(['building-units', buildingUnitId, 'leases']);
   }
 }

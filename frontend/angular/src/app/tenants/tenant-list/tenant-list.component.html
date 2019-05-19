@@ -1,0 +1,10 @@
+<h2>Tenants</h2>
+
+<p-button label="New tenant" icon="pi pi-plus" (onClick)="startNewTenant()"></p-button>
+
+<tenant-editor
+  [tenant]="editedTenant"
+  [visible]="tenantEditorVisible"
+  (onCancel)="onCancelBuildingUnitEditor()"
+  (onSave)="onSaveBuildingUnitEditor()">
+</tenant-editor>

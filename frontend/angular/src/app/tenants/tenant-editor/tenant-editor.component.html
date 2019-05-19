@@ -1,0 +1,78 @@
+<div *ngIf="tenant" class="tenant-editor">
+  <p-dialog class="tenant-dialog" [(visible)]="visible" [style]="{width: '640px', height: 'auto'}" [resizable]="false" [modal]="true" [draggable]="false" [closable]="false">
+    <p-header>
+      <span *ngIf="isNew(buildingUnit); then new_tenant else edit_tenant"></span>
+      <ng-template #new_tenant>New tenant</ng-template>
+      <ng-template #edit_tenant>Edit tenant</ng-template>
+    </p-header>
+
+    <div class="p-grid p-justify-center">
+      <div class="p-col-12 p-md-6">
+        <label for="person-type">Person type</label>
+        <p-dropdown id="person-type" [options]="types" [(ngModel)]="tenant.type" [required]="true"></p-dropdown>
+      </div>
+      <div class="p-col-12 p-md-6">
+        <!-- Blank cell -->
+      </div>
+      <div *ngIf="isLegalPerson()" class="p-col-12 p-md-12">
+        <label for="company-name">Company name</label>
+        <input id="company-name" type="text" size="30" class="required" [required]="true" pInputText [disabled]="disabled" [(ngModel)]="tenant.companyName">
+      </div>
+      <div *ngIf="isNaturalPerson()" class="p-col-12 p-md-6">
+        <label for="last-name">Last name</label>
+        <input id="last-name" type="text" size="30" class="required" [required]="true" pInputText [disabled]="disabled" [(ngModel)]="tenant.lastName">
+      </div>
+      <div *ngIf="isNaturalPerson()" class="p-col-12 p-md-6">
+        <label for="first-name">First name</label>
+        <input id="first-name" type="text" size="30" pInputText [disabled]="disabled" [(ngModel)]="tenant.firstName">
+      </div>
+      <div class="p-col-12 p-md-6">
+        <label for="house-number">House number</label>
+        <input id="house-number" type="text" size="30" pInputText [disabled]="disabled" [(ngModel)]="tenant.houseNumber">
+      </div>
+      <div class="p-col-12 p-md-6">
+        <label for="registry-number">Registry number</label>
+        <input id="registry-number" type="text" size="30" pInputText [disabled]="disabled" [(ngModel)]="tenant.registryNumber">
+      </div>
+      <div class="p-col-12 p-md-6">
+        <label for="street-name">Street name</label>
+        <input id="street-name" type="text" size="30" pInputText [disabled]="disabled" [(ngModel)]="tenant.streetName">
+      </div>
+      <div class="p-col-12 p-md-6">
+        <label for="town-name">Town name</label>
+        <input id="town-name" type="text" size="30" pInputText [disabled]="disabled" [(ngModel)]="tenant.townName">
+      </div>
+      <div class="p-col-12 p-md-6">
+        <label for="postal-code">Postal code</label>
+        <input id="postal-code" type="text" size="30" pInputText [disabled]="disabled" [(ngModel)]="tenant.postalCode">
+      </div>
+      <div class="p-col-12 p-md-6">
+        <label for="country-name">Country name</label>
+        <input id="country-name" type="text" size="30" pInputText [disabled]="disabled" [(ngModel)]="tenant.countryName">
+      </div>
+      <div class="p-col-12 p-md-6">
+        <label for="telephone1">Telephone 1</label>
+        <input id="telephone1" type="text" size="30" pInputText [disabled]="disabled" [(ngModel)]="tenant.telephone1">
+      </div>
+      <div class="p-col-12 p-md-6">
+        <label for="telephone2">Telephone 2</label>
+        <input id="telephone2" type="text" size="30" pInputText [disabled]="disabled" [(ngModel)]="tenant.telephone2">
+      </div>
+      <div class="p-col-12 p-md-6">
+        <label for="email">E-mail</label>
+        <input id="email" type="text" size="30" pInputText [disabled]="disabled" [(ngModel)]="tenant.email">
+      </div>
+      <div class="p-col-12 p-md-6">
+        <!-- Blank cell -->
+      </div>
+      <div class="p-col-12 p-md-2">
+        <p-button *ngIf="isNew()" label="Create" icon="pi pi-check" class="ui-button-danger" (onClick)="submit()"></p-button>
+        <p-button *ngIf="!isNew()" label="Save" icon="pi pi-check" class="ui-button-danger" (onClick)="submit()"></p-button>
+      </div>
+      <div class="p-col-12 p-md-2">
+        <p-button label="Cancel" icon="pi pi-times" class="ui-button-danger" (onClick)="cancel()"></p-button>
+      </div>
+    </div>
+  </p-dialog>
+</div>
+

@@ -16,11 +16,14 @@
           <div class="p-col-12 p-sm-12 p-md-6 type">Area {{buildingUnit.area}}</div>
         </div>
         <div class="p-grid">
-          <div class="p-col-6">
+          <div class="p-col-4">
             <button pButton type="button" label="Edit" icon="pi pi-pencil" class="ui-button-primary" (click)="openBuildingForm(building)"></button>
           </div>
-          <div class="p-col-6">
+          <div class="p-col-4">
             <button pButton type="button" label="Manage" icon="pi pi-list" class="ui-button-success" (click)="manageBuilding(building)"></button>
+          </div>
+          <div class="p-col-4">
+            <button pButton type="button" label="Leases" icon="pi pi-file" class="ui-button-success" (click)="manageLeases(buildingUnit.id)"></button>
           </div>
         </div>
       </p-panel>

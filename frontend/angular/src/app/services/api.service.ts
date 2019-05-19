@@ -7,6 +7,8 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { MessageService } from 'primeng/api';
 import { HttpService } from "./http.service";
 import {BuildingUnit} from "../building-units/building-unit.model";
+import {Lease} from "../leases/lease.model";
+import {Tenant} from "../tenants/tenant.model";
 
 @Injectable({
   providedIn: 'root'
@@ -52,11 +54,30 @@ export class ApiService {
   }
 
   public updateBuildingUnit(buildingId: number, buildingUnitId: number, buildingUnit: BuildingUnit): Observable<BuildingUnit> {
-    return this.sendRequest<BuildingUnit>('put', '/api/v1/buildings/' + buildingId + '/units/' + buildingUnitId, buildingUnit);
+    return this.sendRequest<BuildingUnit>('put', '/api/v1/building-units/' + buildingUnitId, buildingUnit);
   }
 
-  public getBuildingUnit(buildingId: number, buildingUnitId: number): Observable<BuildingUnit> {
-    return this.sendRequest<BuildingUnit>('get', '/api/v1/buildings/' + buildingId + '/units/' + buildingUnitId);
+  public getBuildingUnit(buildingUnitId: number): Observable<BuildingUnit> {
+    return this.sendRequest<BuildingUnit>('get', '/api/v1/building-units/' + buildingUnitId);
   }
 
+  /* TENANTS */
+
+  public createTenant(tenant: Tenant): Observable<Tenant> {
+    return this.sendRequest<Tenant>('post', '/api/v1/tenants', tenant);
+  }
+
+  /* LEASES */
+
+  public getLeases(buildingUnitId: number): Observable<Lease[]> {
+    return this.sendRequest<Lease[]>('get', '/api/v1/building-units/' + buildingUnitId + '/leases');
+  }
+
+  public createLease(buildingUnitId: number, lease: Lease): Observable<Lease> {
+    return this.sendRequest<Lease>('post', '/api/v1/building-units/' + buildingUnitId + '/leases', lease);
+  }
+
+  public updateLease(id: number, lease: Lease): Observable<Lease> {
+    return this.sendRequest<Lease>('put', '/api/v1/leases/' + id, lease);
+  }
 }

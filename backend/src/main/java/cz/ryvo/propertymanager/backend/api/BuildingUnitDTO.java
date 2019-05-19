@@ -15,10 +15,7 @@ import static javax.persistence.FetchType.LAZY;
 
 @Getter
 @Setter
-public class BuildingUnitDTO {
-
-  @OutputOnly
-  private Long id;
+public class BuildingUnitDTO extends ApiObject {
 
   @NotBlank
   private String name;

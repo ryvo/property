@@ -1,9 +1,9 @@
 package cz.ryvo.propertymanager.backend.endpoint;
 
 import cz.ryvo.propertymanager.backend.api.PersonDTO;
+import cz.ryvo.propertymanager.backend.api.SearchTenantsCriteria;
 import cz.ryvo.propertymanager.backend.converter.TenantConverter;
 import cz.ryvo.propertymanager.backend.converter.TenantsConverter;
-import cz.ryvo.propertymanager.backend.domain.Owner;
 import cz.ryvo.propertymanager.backend.domain.Tenant;
 import cz.ryvo.propertymanager.backend.service.TenantService;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,9 +29,9 @@ public class TenantsEndpoint {
     this.tenantsConverter = tenantsConverter;
   }
 
-  @GetMapping(produces = APPLICATION_JSON_VALUE)
-  public List<PersonDTO> listTenants() {
-    return tenantsConverter.toDTO(service.listTenants());
+  @PostMapping(path = "/search", produces = APPLICATION_JSON_VALUE)
+  public List<PersonDTO> searchTenants(@RequestBody @Validated SearchTenantsCriteria criteria) {
+    return tenantsConverter.toDTO(service.searchTenants(criteria));
   }
 
   @Transactional

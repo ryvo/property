@@ -1,0 +1,23 @@
+<div *ngIf="$buildingUnit | async as buildingUnit">
+  <h2>Leases of {{buildingUnit.name}}</h2>
+  <p-button label="New building" icon="pi pi-plus" (onClick)="openNewBuildingForm()"></p-button>
+  <div *ngIf="$leases | async as leases">
+    <div *ngFor="let lease of leases" class="p-col-12 p-sm-12 p-md-6 p-lg-4">
+      <p-card>
+        <ul>
+          <li>{{lease.startDate}}</li>
+          <li>{{lease.endDate}}</li>
+          <li>{{lease.monthlyRent}}</li>
+        </ul>
+        <div class="p-grid">
+          <div class="p-col-6">
+            <button pButton type="button" label="Edit" icon="pi pi-pencil" class="ui-button-primary" (click)="openBuildingForm(building)"></button>
+          </div>
+          <div class="p-col-6">
+            <button pButton type="button" label="Manage" icon="pi pi-list" class="ui-button-success" (click)="manageBuilding(building)"></button>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>

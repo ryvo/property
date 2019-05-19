@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 

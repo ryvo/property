@@ -1,6 +1,5 @@
 package cz.ryvo.propertymanager.backend.api;
 
-import cz.ryvo.propertymanager.backend.validation.constraint.OutputOnly;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,10 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-public class BuildingDTO {
-
-  @OutputOnly
-  private Long id;
+public class BuildingDTO extends ApiObject {
 
   @NotBlank
   private String houseNumber;

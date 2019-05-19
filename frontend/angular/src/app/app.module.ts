@@ -25,6 +25,7 @@ import { MessageService } from "primeng/api";
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
 import { LoaderComponent } from './components/loader/loader.component';
 import { SpinnerModule } from 'primeng/spinner';
 import { LoaderService } from "./services/loader.service";
@@ -37,6 +38,10 @@ import { RouterModule } from "@angular/router";
 import { routes } from "./routes";
 import { OwnerEditorComponent } from './owners/owner-editor/owner-editor.component';
 import { BuildingUnitEditorComponent } from './building-units/building-unit-editor/building-unit-editor.component';
+import { LeaseListComponent } from './leases/lease-list/lease-list.component';
+import { LeaseEditorComponent } from './leases/lease-editor/lease-editor.component';
+import { TenantListComponent } from './tenants/tenant-list/tenant-list.component';
+import { TenantEditorComponent } from './tenants/tenant-editor/tenant-editor.component';
 
 
 // Relates to FontAwesome
@@ -50,7 +55,11 @@ library.add(fas, far);
     LoaderComponent,
     BuildingDashboardComponent,
     OwnerEditorComponent,
-    BuildingUnitEditorComponent
+    BuildingUnitEditorComponent,
+    LeaseListComponent,
+    LeaseEditorComponent,
+    TenantListComponent,
+    TenantEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +79,7 @@ library.add(fas, far);
     PanelModule,
     CardModule,
     DropdownModule,
+    SelectButtonModule,
     SpinnerModule,
     ToastModule,
     ProgressSpinnerModule

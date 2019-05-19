@@ -40,8 +40,8 @@ export class BuildingUnitsService {
     return this.apiService.updateBuildingUnit(buildingId, buildingUnitId, buildingUnitClone);
   }
 
-  getBuildingUnit(buildingId: number, buildingUnitId: number): Observable<BuildingUnit> {
-    return this.apiService.getBuildingUnit(buildingId, buildingUnitId);
+  getBuildingUnit(buildingUnitId: number): Observable<BuildingUnit> {
+    return this.apiService.getBuildingUnit(buildingUnitId);
   }
 
   static cloneBuildingUnit(buildingUnit: BuildingUnit): BuildingUnit {
