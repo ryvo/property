@@ -4,10 +4,24 @@
 body {
   max-width: $page-width;
   margin:0 auto 0 auto;
+
+  label {
+    display: block;
+  }
+
+  .ui-inputtext {
+    width: 100%;
+  }
+
+  .ui-autocomplete {
+    width: 100%;
+  }
+
+  .required,
+  .required:hover {
+    border: 1px solid #ffdada !important;
+    background-color: #fff4f4 !important;
+  }
+
 }
 
-.required,
-.required:hover {
-  border: 1px solid #ffdada !important;
-  background-color: #fff4f4 !important;
-}

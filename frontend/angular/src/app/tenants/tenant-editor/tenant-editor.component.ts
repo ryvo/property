@@ -51,7 +51,7 @@ export class TenantEditorComponent implements OnInit {
 
     observable.subscribe(
       (response: Tenant) => {
-        this.visible = false;
+        this.visible = false;-
         this.onSave.emit(response);
       },
       (error) => {

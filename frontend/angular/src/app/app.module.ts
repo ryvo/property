@@ -28,6 +28,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { LoaderComponent } from './components/loader/loader.component';
 import { SpinnerModule } from 'primeng/spinner';
+import { CalendarModule } from 'primeng/calendar';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { LoaderService } from "./services/loader.service";
 import { HttpService } from "./services/http.service";
 import { HttpHandler } from "@angular/common/http";
@@ -40,6 +42,7 @@ import { OwnerEditorComponent } from './owners/owner-editor/owner-editor.compone
 import { BuildingUnitEditorComponent } from './building-units/building-unit-editor/building-unit-editor.component';
 import { LeaseListComponent } from './leases/lease-list/lease-list.component';
 import { LeaseEditorComponent } from './leases/lease-editor/lease-editor.component';
+import { TenantSelectComponent } from './tenants/tenant-select/tenant-select.component';
 import { TenantListComponent } from './tenants/tenant-list/tenant-list.component';
 import { TenantEditorComponent } from './tenants/tenant-editor/tenant-editor.component';
 
@@ -58,6 +61,7 @@ library.add(fas, far);
     BuildingUnitEditorComponent,
     LeaseListComponent,
     LeaseEditorComponent,
+    TenantSelectComponent,
     TenantListComponent,
     TenantEditorComponent
   ],
@@ -81,6 +85,8 @@ library.add(fas, far);
     DropdownModule,
     SelectButtonModule,
     SpinnerModule,
+    CalendarModule,
+    AutoCompleteModule,
     ToastModule,
     ProgressSpinnerModule
   ],

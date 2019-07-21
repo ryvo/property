@@ -3,6 +3,7 @@ package cz.ryvo.propertymanager.backend.service;
 import com.querydsl.core.support.QueryBase;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import cz.ryvo.propertymanager.backend.api.SearchTenantsCriteria;
@@ -71,9 +72,14 @@ class TenantServiceImpl implements TenantService {
 
     BooleanExpression predicate = tenant.portfolio.id.eq(AuthUtils.getPortfolioId());
     if (!isBlank(criteria.getName())) {
-      BooleanExpression namePredicate =
-          tenant.type.eq(NATURAL_PERSON).and(tenant.lastName.contains(criteria.getName()).or(tenant.firstName.contains(criteria.getName())))
-          .or(tenant.type.eq(LEGAL_PERSON).and(tenant.companyName.contains(criteria.getName()));
+      String[] names = criteria.getName().toLowerCase().split(" ");
+      BooleanExpression namePredicate = null;
+      for(String name: names) {
+        BooleanExpression tmpPredicate =
+          tenant.type.eq(NATURAL_PERSON).and(tenant.lastName.containsIgnoreCase(name).or(tenant.firstName.containsIgnoreCase(name)))
+          .or(tenant.type.eq(LEGAL_PERSON).and(tenant.companyName.containsIgnoreCase(name)));
+        namePredicate = (namePredicate == null) ? tmpPredicate : namePredicate.and(tmpPredicate);
+      }
       predicate = predicate.and(namePredicate);
     }
 

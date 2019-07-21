@@ -36,13 +36,15 @@ public class LeasesEndpoint {
     return leasesConverter.toDTO(leaseService.listLeases(buildingUnitId));
   }
 
+  @Transactional
   @PostMapping(path = "/building-units/{buildingUnitId}/leases")
-  public LeaseDTO createLease(@PathVariable("buildingUnitId") long buildingUnitId, @RequestBody @Validated Lease lease) {
-    return leaseConverter.toDTO(leaseService.createLease(buildingUnitId, lease));
+  public LeaseDTO createLease(@PathVariable("buildingUnitId") long buildingUnitId, @RequestBody @Validated LeaseDTO lease) {
+    return leaseConverter.toDTO(leaseService.createLease(buildingUnitId, leaseConverter.toEntity(lease)));
   }
 
+  @Transactional
   @PutMapping(path = "/leases/{id}")
-  public LeaseDTO updateLease(@PathVariable("id") long id, @RequestBody @Validated Lease lease) {
-    return leaseConverter.toDTO(leaseService.updateLease(id, lease));
+  public LeaseDTO updateLease(@PathVariable("id") long id, @RequestBody @Validated LeaseDTO lease) {
+    return leaseConverter.toDTO(leaseService.updateLease(id, leaseConverter.toEntity(lease)));
   }
 }

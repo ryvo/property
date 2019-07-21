@@ -1,0 +1,25 @@
+<div class="tenant-select">
+  <div *ngIf="!selected">
+    <p-autoComplete
+      [(ngModel)]="query"
+      [suggestions]="suggestions"
+      (completeMethod)="search($event)"
+      [minLength]="3"
+      [dropdown]="false"
+      (onSelect)="select($event)"
+      [forceSelection]="true"
+      field="displayName">
+      <ng-template let-value pTemplate="item">
+        <span class="display-name">{{value.displayName}}</span>
+        <span class="display-address">{{value.displayAddress}}</span>
+      </ng-template>
+    </p-autoComplete>
+  </div>
+  <div *ngIf="selected">
+    <span class="tenant-name-and-address">
+      <div class="display-name">{{selected.displayName}}</div>
+      <div class="display-address">{{selected.displayAddress}}</div>
+      <fa-icon (click)="unSelect($event)" icon="times-circle" size="2x"></fa-icon>
+    </span>
+  </div>
+</div>

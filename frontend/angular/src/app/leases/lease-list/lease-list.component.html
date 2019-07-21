@@ -1,6 +1,6 @@
 <div *ngIf="$buildingUnit | async as buildingUnit">
   <h2>Leases of {{buildingUnit.name}}</h2>
-  <p-button label="New building" icon="pi pi-plus" (onClick)="openNewBuildingForm()"></p-button>
+  <p-button label="New lease" icon="pi pi-plus" (onClick)="startNewLease()"></p-button>
   <div *ngIf="$leases | async as leases">
     <div *ngFor="let lease of leases" class="p-col-12 p-sm-12 p-md-6 p-lg-4">
       <p-card>
@@ -20,4 +20,12 @@
       </p-card>
     </div>
   </div>
+
+  <lease-editor
+    [buildingUnitId]="buildingUnit.id"
+    [lease]="editedLease"
+    [(visible)]="leaseEditorVisible"
+    (onSave)="onLeaseEditorSaved($event)"
+    (onCancel)="onLeaseEditorCancel($event)">
+  </lease-editor>
 </div>

@@ -68,4 +68,29 @@ export class BuildingListComponent implements OnInit {
   isNew(building: Building) {
     return typeof building !== 'undefined' && typeof building.id === 'undefined';
   }
+
+/*  getFullAddress(building: Building) {
+    let streetPart;
+    if (building.streetName) {
+      streetPart += building.streetName;
+      if (building.registryNumber && building.houseNumber) {
+        streetPart += ' ' + building.registryNumber + '/' + building.houseNumber;
+      } else if (building.registryNumber) {
+        streetPart += ' ' + building.registryNumber;
+      } else if (building.houseNumber) {
+        streetPart += ' ' + building.houseNumber;
+      }
+    }
+
+    let townPart;
+    if (building.townName) {
+      townPart = building.townName;
+      if (building.postalCode) {
+        townPart += building.postalCode + ' ' + townPart;
+      }
+    }
+
+    let countryPart;
+
+  }*/
 }

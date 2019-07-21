@@ -18,15 +18,19 @@ public class PersonUtils {
     dto.setCompanyName(entity.getCompanyName());
     dto.setLastName(entity.getLastName());
     dto.setFirstName(entity.getFirstName());
-    dto.setHouseNumber(entity.getAddress().getHouseNumber());
-    dto.setRegistryNumber(entity.getAddress().getRegistryNumber());
-    dto.setStreetName(entity.getAddress().getStreetName());
-    dto.setTownName(entity.getAddress().getTownName());
-    dto.setPostalCode(entity.getAddress().getPostalCode());
-    dto.setCountryName(entity.getAddress().getCountryName());
-    dto.setEmail(entity.getContact().getEmail());
-    dto.setTelephone1(entity.getContact().getTelephone1());
-    dto.setTelephone2(entity.getContact().getTelephone2());
+    if (entity.getAddress() != null) {
+      dto.setHouseNumber(entity.getAddress().getHouseNumber());
+      dto.setRegistryNumber(entity.getAddress().getRegistryNumber());
+      dto.setStreetName(entity.getAddress().getStreetName());
+      dto.setTownName(entity.getAddress().getTownName());
+      dto.setPostalCode(entity.getAddress().getPostalCode());
+      dto.setCountryName(entity.getAddress().getCountryName());
+    }
+    if (entity.getContact() != null) {
+      dto.setEmail(entity.getContact().getEmail());
+      dto.setTelephone1(entity.getContact().getTelephone1());
+      dto.setTelephone2(entity.getContact().getTelephone2());
+    }
   }
 
   public static void mergeDtoIntoEntity(PersonDTO dto, Person entity) {

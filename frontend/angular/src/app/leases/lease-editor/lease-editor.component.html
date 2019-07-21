@@ -1,41 +1,33 @@
-<div *ngIf="buildingId && buildingUnit" class="building-unit-editor">
-  <p-dialog class="building-unit-dialog" [(visible)]="visible" [style]="{width: '640px', height: 'auto'}" [resizable]="false" [modal]="true" [draggable]="false" [closable]="false">
+<div class="lease-editor">
+  <p-dialog class="lease-dialog" [visible]="_visible" [style]="{width: '640px', height: 'auto'}" [resizable]="false" [modal]="true" [draggable]="false" [closable]="false">
     <p-header>
-      <span *ngIf="isNew(buildingUnit); then new_building_unit else edit_building_unit"></span>
-      <ng-template #new_building_unit>New building unit</ng-template>
-      <ng-template #edit_building_unit>Edit building unit</ng-template>
+      <span *ngIf="isNew(lease); then new_building_unit else edit_building_unit"></span>
+      <ng-template #new_lease>New lease</ng-template>
+      <ng-template #edit_lease>Edit lease</ng-template>
     </p-header>
 
     <div class="p-grid p-justify-center">
-      <div class="p-col-12 p-md-6">
-          <span class="ui-float-label">
-            <input id="building-unit-name" type="text" size="30" class="required" pInputText [disabled]="disabled" [(ngModel)]="buildingUnit.name">
-            <label for="building-unit-name">Name</label>
-          </span>
+      <div class="p-col-4">
+        <label for="lease-start-date">Start date</label>
+        <p-calendar id="lease-start-date" [(ngModel)]="lease && lease.startDate" [required]="true" [disabled]="disabled"></p-calendar>
+      </div>
+      <div class="p-col-4">
+        <label for="lease-end-date">End date</label>
+        <p-calendar id="lease-end-date" [(ngModel)]="lease && lease.endDate" [required]="true" [disabled]="disabled"></p-calendar>
+      </div>
+      <div class="p-col-4">
+        <label for="monthly-rent">Monthly rent</label>
+        <input id="monthly-rent" pInputText [(ngModel)]="lease && lease.monthlyRent"/>
+      </div>
+      <div class="p-col-12 p-md-12">
+        <label for="tenant">Tenant</label>
+        <tenant-select id="tenant" (onSelect)="selectTenant($event)" (onUnSelect)="unSelectTenant($event)"></tenant-select>
       </div>
       <div class="p-col-12 p-md-6">
-          <span class="ui-float-label">
-            <p-dropdown [inputId]="building-unit-type" [options]="types" [disabled]="disabled" [(ngModel)]="buildingUnit.type" [autoDisplayFirst]="false"></p-dropdown>
-            <label for="building-unit-type">Type</label>
-          </span>
+        <p-button *ngIf="isNew()" label="Create" icon="pi pi-check" class="ui-button-danger" (onClick)="submit()"></p-button>
+        <p-button *ngIf="!isNew()" label="Save" icon="pi pi-check" class="ui-button-danger" (onClick)="submit()"></p-button>
       </div>
       <div class="p-col-12 p-md-6">
-          <span class="ui-float-label">
-            <p-spinner [inputId]="building-unit-storey" size="30" [disabled]="disabled" [(ngModel)]="buildingUnit.storey" [min]="-100" [max]="500"></p-spinner>
-            <label for="building-unit-storey">Storey</label>
-          </span>
-      </div>
-      <div class="p-col-12 p-md-6">
-          <span class="ui-float-label">
-            <p-spinner [inputId]="building-unit-area" size="30" [disabled]="disabled" [(ngModel)]="buildingUnit.area" [min]="0" [max]="1000000"></p-spinner>
-            <label for="building-unit-area">Area</label>
-          </span>
-      </div>
-      <div class="p-col-12 p-md-2">
-        <p-button *ngIf="isNew(buildingUnit)" label="Create" icon="pi pi-check" class="ui-button-danger" (onClick)="submit()"></p-button>
-        <p-button *ngIf="!isNew(buildingUnit)" label="Save" icon="pi pi-check" class="ui-button-danger" (onClick)="submit()"></p-button>
-      </div>
-      <div class="p-col-12 p-md-2">
         <p-button label="Cancel" icon="pi pi-times" class="ui-button-danger" (onClick)="cancel()"></p-button>
       </div>
     </div>

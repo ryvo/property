@@ -3,4 +3,5 @@ export class Lease {
   startDate: string;
   endDate: string;
   monthlyRent: number;
+  tenantId: number;
 }

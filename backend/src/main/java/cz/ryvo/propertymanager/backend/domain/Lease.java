@@ -24,10 +24,10 @@ public class Lease extends DomainObject {
   private BigDecimal monthlyRent;
 
   @ManyToOne(fetch = LAZY)
-  @JoinColumn(name = "building_unit_id")
+  @JoinColumn(name = "building_unit_id", nullable = false)
   private BuildingUnit buildingUnit;
 
   @ManyToOne(fetch = LAZY)
-  @JoinColumn(name = "tenant_id")
+  @JoinColumn(name = "tenant_id", nullable = false)
   private Tenant tenant;
 }

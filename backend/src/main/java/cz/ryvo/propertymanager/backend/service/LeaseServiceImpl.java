@@ -37,7 +37,8 @@ class LeaseServiceImpl implements LeaseService {
 
   @Override
   public List<Lease> listActiveLeases(long buildingId) {
-    return repository.findAllByBuildingId(buildingId);
+    long portfolioId = AuthUtils.getPortfolioId();
+    return repository.findAllByBuildingId(portfolioId, buildingId);
   }
 
   @Override
@@ -64,9 +65,8 @@ class LeaseServiceImpl implements LeaseService {
     // Check conflicting leases
     List<Lease> leases = repository.findAllByBuildingUnitIdOrderByStartDateDesc(buildingUnitId);
     Optional<Lease> conflictingLease = leases.stream()
-        .filter(p ->
-            p.getEndDate().compareTo(lease.getStartDate()) >= 0 || p.getStartDate().compareTo(lease.getEndDate()) <= 0
-        ).findAny();
+            .filter(p -> p.getEndDate() == null || p.getEndDate().compareTo(lease.getStartDate()) >= 0)
+            .findAny();
     if (conflictingLease.isPresent()) {
       throw new BadRequestException("Lease start or end date is conflicting with an existing lease.");
     }
@@ -74,6 +74,10 @@ class LeaseServiceImpl implements LeaseService {
     lease.setBuildingUnit(buildingUnit);
     lease.setTenant(tenant);
     return repository.save(lease);
+  }
+
+  private boolean doLeaseDateOverlaps(Lease existingLease, Lease newLease) {
+    return existingLease.getEndDate() == null || existingLease.getEndDate().compareTo(newLease.getStartDate()) >= 0;
   }
 
   @Override

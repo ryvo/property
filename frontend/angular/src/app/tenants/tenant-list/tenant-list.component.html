@@ -2,9 +2,18 @@
 
 <p-button label="New tenant" icon="pi pi-plus" (onClick)="startNewTenant()"></p-button>
 
+<div>
+  <label for="tenant">Search tenant</label>
+  <p-autoComplete [(ngModel)]="val" [suggestions]="suggestedTenants" (completeMethod)="searchTenants($event)" [minLength]="3" [forceSelection]="true">
+    <ng-template>
+
+    </ng-template>
+  </p-autoComplete>
+</div>
+
 <tenant-editor
   [tenant]="editedTenant"
   [visible]="tenantEditorVisible"
-  (onCancel)="onCancelBuildingUnitEditor()"
-  (onSave)="onSaveBuildingUnitEditor()">
+  (onCancel)="onCancelTenantEditor()"
+  (onSave)="onSaveTenantEditor()">
 </tenant-editor>

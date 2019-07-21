@@ -10,6 +10,7 @@ class BuildingUnitConverterImpl implements BuildingUnitConverter {
   @Override
   public BuildingUnitDTO toDTO(BuildingUnit domain) {
     BuildingUnitDTO dto = new BuildingUnitDTO();
+    dto.setBuildingId(domain.getBuilding().getId());
     dto.setId(domain.getId());
     dto.setType(domain.getType());
     dto.setName(domain.getName());

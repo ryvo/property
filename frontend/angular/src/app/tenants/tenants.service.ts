@@ -33,6 +33,10 @@ export class TenantsService {
     return null;
   }
 
+  searchTenants(query: string): Observable<Tenant[]> {
+    return this.apiService.searchTenants(query);
+  }
+
   static cloneTenant(tenant: Tenant): Tenant {
     return _.clone(tenant);
   }

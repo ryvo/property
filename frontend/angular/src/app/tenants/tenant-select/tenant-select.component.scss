@@ -1,0 +1,28 @@
+.tenant-select {
+  display: inline-block;
+  width: 100%;
+
+  .display-name {
+    display: block;
+    font-weight: bold;
+  }
+
+  .display-address {
+    display: block;
+    font-style: italic;
+  }
+
+  .tenant-name-and-address {
+    width: 100%;
+    display: inline-block;
+    position: relative;
+
+    fa-icon {
+      color: darkred;
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      right: 0;
+    }
+  }
+}

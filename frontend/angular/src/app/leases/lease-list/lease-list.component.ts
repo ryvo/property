@@ -16,6 +16,8 @@ export class LeaseListComponent implements OnInit, OnDestroy {
   private buildingUnitId: number;
   private $buildingUnit: Observable<BuildingUnit>;
   private $leases: Observable<Lease[]>;
+  private editedLease: Lease;
+  private leaseEditorVisible: boolean = false;
 
   constructor(
     private buildingUnitsService: BuildingUnitsService,
@@ -40,5 +42,19 @@ export class LeaseListComponent implements OnInit, OnDestroy {
 
   fetchLeases() {
     this.$leases = this.leasesService.getLeases(this.buildingUnitId);
+  }
+
+  startNewLease() {
+    this.editedLease = new Lease();
+    this.leaseEditorVisible = true;
+  }
+
+  onLeaseEditorSaved(lease: Lease) {
+    this.editedLease = undefined;
+    this.fetchLeases();
+  }
+
+  onLeaseEditorCancel() {
+    this.editedLease = undefined;
   }
 }
