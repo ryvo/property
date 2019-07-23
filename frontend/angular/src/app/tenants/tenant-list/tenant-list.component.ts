@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Tenant, TenantType} from "../tenant.model";
-import {TenantsService} from "../tenants.service";
+import {TenantService} from "../tenant.service";
 import {Observable} from "rxjs/internal/Observable";
-import {Building} from "../../buildings/building.model";
-import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-tenant-list',
@@ -17,7 +15,7 @@ export class TenantListComponent implements OnInit {
   private suggestedTenants: Tenant[];
   private $tenants: Observable<Tenant[]>;
 
-  constructor(private tenantsService: TenantsService) { }
+  constructor(private tenantsService: TenantService) { }
 
   ngOnInit() {
   }

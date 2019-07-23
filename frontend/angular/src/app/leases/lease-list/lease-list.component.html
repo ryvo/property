@@ -3,17 +3,30 @@
   <p-button label="New lease" icon="pi pi-plus" (onClick)="startNewLease()"></p-button>
   <div *ngIf="$leases | async as leases">
     <div *ngFor="let lease of leases" class="p-col-12 p-sm-12 p-md-6 p-lg-4">
-      <p-card>
-        <ul>
-          <li>{{lease.startDate}}</li>
-          <li>{{lease.endDate}}</li>
-          <li>{{lease.monthlyRent}}</li>
-        </ul>
+      <p-card class="lease-card">
+        <table>
+          <tr>
+            <td>Počátek</td>
+            <td class="text-right">{{lease.startDate | date}}</td>
+          </tr>
+          <tr>
+            <td>Konec</td>
+            <td class="text-right">{{lease.endDate | date}}</td>
+          </tr>
+          <tr>
+            <td>Nájemné</td>
+            <td class="text-right">{{lease.monthlyRent}}</td>
+          </tr>
+          <tr>
+            <td>Nájemník</td>
+            <td class="text-right">{{lease.monthlyRent}}</td>
+          </tr>
+        </table>
         <div class="p-grid">
           <div class="p-col-6">
-            <button pButton type="button" label="Edit" icon="pi pi-pencil" class="ui-button-primary" (click)="openBuildingForm(building)"></button>
+            <button pButton type="button" label="Edit" icon="pi pi-pencil" class="ui-button-primary" (click)="editLease(lease)"></button>
           </div>
-          <div class="p-col-6">
+          <div class="p-col-6 text-right">
             <button pButton type="button" label="Manage" icon="pi pi-list" class="ui-button-success" (click)="manageBuilding(building)"></button>
           </div>
         </div>

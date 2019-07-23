@@ -1,7 +1,7 @@
 export class Lease {
   id: number;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   monthlyRent: number;
   tenantId: number;
 }

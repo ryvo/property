@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +46,10 @@ import { TenantSelectComponent } from './tenants/tenant-select/tenant-select.com
 import { TenantListComponent } from './tenants/tenant-list/tenant-list.component';
 import { TenantEditorComponent } from './tenants/tenant-editor/tenant-editor.component';
 
+import { registerLocaleData } from '@angular/common'
+import localeCS from '@angular/common/locales/cs';
+
+registerLocaleData(localeCS, 'cs');
 
 // Relates to FontAwesome
 library.add(fas, far);
@@ -91,6 +95,10 @@ library.add(fas, far);
     ProgressSpinnerModule
   ],
   providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'cs'
+    },
     LoaderService,
     {
       provide: HttpService,

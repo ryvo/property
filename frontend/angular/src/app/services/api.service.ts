@@ -71,6 +71,10 @@ export class ApiService {
     return this.sendRequest<Tenant[]>('post', '/api/v1/tenants/search', { name: query });
   }
 
+  public getTenant(id: number): Observable<Tenant> {
+    return this.sendRequest<Tenant>('get', '/api/v1/tenants/' + id);
+  }
+
   /* LEASES */
 
   public getLeases(buildingUnitId: number): Observable<Lease[]> {

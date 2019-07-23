@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { SelectItem } from "primeng/api";
-import {TenantsService} from "../tenants.service";
+import {TenantService} from "../tenant.service";
 import {Tenant, TenantType} from "../tenant.model";
 import {Observable} from "rxjs/internal/Observable";
 
@@ -19,7 +19,7 @@ export class TenantEditorComponent implements OnInit {
 
   private types: SelectItem[] = [];
 
-  constructor(private tenantsService: TenantsService) { }
+  constructor(private tenantsService: TenantService) { }
 
   ngOnInit() {
     this.types = this.tenantsService.getTenantTypes();

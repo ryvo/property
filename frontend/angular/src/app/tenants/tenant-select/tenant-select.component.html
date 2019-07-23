@@ -1,5 +1,5 @@
 <div class="tenant-select">
-  <div *ngIf="!selected">
+  <div *ngIf="!_selected">
     <p-autoComplete
       [(ngModel)]="query"
       [suggestions]="suggestions"
@@ -15,10 +15,10 @@
       </ng-template>
     </p-autoComplete>
   </div>
-  <div *ngIf="selected">
+  <div *ngIf="_selected">
     <span class="tenant-name-and-address">
-      <div class="display-name">{{selected.displayName}}</div>
-      <div class="display-address">{{selected.displayAddress}}</div>
+      <div class="display-name">{{_selected.displayName}}</div>
+      <div class="display-address">{{_selected.displayAddress}}</div>
       <fa-icon (click)="unSelect($event)" icon="times-circle" size="2x"></fa-icon>
     </span>
   </div>

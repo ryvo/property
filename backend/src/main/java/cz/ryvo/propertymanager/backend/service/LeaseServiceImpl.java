@@ -95,8 +95,14 @@ class LeaseServiceImpl implements LeaseService {
       throw new NotFoundException("Lease not found");
     }
 
-    // Update lease
+    // Update lease properties
     LeaseUtils.merge(lease, persistedLease);
+    Long newTenantId = lease.getTenant().getId();
+    if (!persistedLease.getTenant().getId().equals(newTenantId)) {
+      Tenant newTenant = tenantService.getTenant(newTenantId);
+      persistedLease.setTenant(newTenant);
+    }
+
     return repository.save(persistedLease);
   }
 }

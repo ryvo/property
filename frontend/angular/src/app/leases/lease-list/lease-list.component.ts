@@ -5,6 +5,8 @@ import {Lease} from "../lease.model";
 import {Observable} from "rxjs/internal/Observable";
 import {BuildingUnit} from "../../building-units/building-unit.model";
 import {BuildingUnitsService} from "../../building-units/building-units.service";
+import {TenantUtils} from'../../tenants/tenant.utils';
+import {Tenant} from "../../tenants/tenant.model";
 
 @Component({
   selector: 'lease-list',
@@ -42,6 +44,9 @@ export class LeaseListComponent implements OnInit, OnDestroy {
 
   fetchLeases() {
     this.$leases = this.leasesService.getLeases(this.buildingUnitId);
+    this.$leases.subscribe(
+      leases => console.log(leases)
+    );
   }
 
   startNewLease() {
@@ -49,7 +54,16 @@ export class LeaseListComponent implements OnInit, OnDestroy {
     this.leaseEditorVisible = true;
   }
 
-  onLeaseEditorSaved(lease: Lease) {
+  editLease(lease: Lease) {
+    this.editedLease = lease;
+    this.leaseEditorVisible = true;
+  }
+
+  tenantName(lease: Lease): string {
+    return (lease && lease.te) ? TenantUtils.getDisplayName(tenant) : undefined;
+  }
+
+  onLeaseEditorSaved() {
     this.editedLease = undefined;
     this.fetchLeases();
   }

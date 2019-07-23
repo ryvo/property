@@ -1,8 +1,7 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Tenant} from "../tenant.model";
-import {TenantsService} from "../tenants.service";
-import {isNullOrUndefined} from "util";
-import {AutoComplete} from "primeng/primeng";
+import {TenantService} from "../tenant.service";
+import {TenantUtils} from "../tenant.utils";
 
 @Component({
   selector: 'tenant-select',
@@ -11,8 +10,14 @@ import {AutoComplete} from "primeng/primeng";
 })
 export class TenantSelectComponent implements OnInit {
 
+  private _selected: any;
+
+  @Input('selected')
+  set selected(newTenant: Tenant) {
+    this._selected = this.transformTenant(newTenant);
+  };
+
   suggestions: Tenant[];
-  selected: Tenant;
   query: any;
 
   @Output()
@@ -21,7 +26,7 @@ export class TenantSelectComponent implements OnInit {
   @Output()
   onUnSelect = new EventEmitter<Tenant>();
 
-  constructor(private tenantsService: TenantsService) { }
+  constructor(private tenantService: TenantService) { }
 
   ngOnInit() {
   }
@@ -29,7 +34,7 @@ export class TenantSelectComponent implements OnInit {
   search(event) {
     this.suggestions = undefined;
     if (event.query.length > 3) {
-      this.tenantsService.searchTenants(event.query)
+      this.tenantService.searchTenants(event.query)
         .subscribe((tenants: Tenant[]) => {
           this.suggestions = this.transformTenants(tenants)
         });
@@ -38,38 +43,34 @@ export class TenantSelectComponent implements OnInit {
     }
   }
 
-  transformTenants(tenants: Tenant[]) {
+  transformTenants(tenants: Tenant[]): any {
     let result = [];
-    let that = this;
-    tenants.forEach(function(value) {
-      let item = {
-        tenant: value,
-        displayName: that.getDisplayName(value),
-        displayAddress: that.getDisplayAddress(value)
-      };
-      result.push(item);
+    tenants.forEach((value) => {
+      result.push(this.transformTenant(value));
     });
     return result;
   };
 
-  getDisplayName(tenant: Tenant) {
-    return [tenant.firstName, tenant.lastName, tenant.companyName].filter(Boolean).join(' ');
-  }
-
-  getDisplayAddress(tenant: Tenant) {
-    let houseNumber = [tenant.houseNumber, tenant.registryNumber].filter(Boolean).join('/');
-    let streetWithHouseNumber = !isNullOrUndefined(tenant.streetName) ? tenant.streetName + ' ' + houseNumber : undefined;
-    return [streetWithHouseNumber, tenant.townName, tenant.countryName].filter(Boolean).join(', ');
-  }
+  transformTenant(tenant: Tenant) {
+    if (tenant) {
+      return {
+        tenant: tenant,
+        displayName: TenantUtils.getDisplayName(tenant),
+        displayAddress: TenantUtils.getDisplayAddress(tenant)
+      };
+    } else {
+      return undefined;
+    }
+  };
 
   select(value: any) {
-    this.selected = value;
+    this._selected = value;
     this.onSelect.emit(value.tenant);
   }
 
   unSelect(value: Tenant) {
     this.query = undefined;
-    this.selected = undefined;
+    this._selected = undefined;
     this.onUnSelect.emit(value);
   }
 }

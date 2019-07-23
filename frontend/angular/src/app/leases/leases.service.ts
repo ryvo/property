@@ -16,17 +16,15 @@ export class LeasesService {
   }
 
   createLease(buildingUnitId: number, lease: Lease): Observable<Lease> {
-    return this.apiService.createLease(buildingUnitId, lease);
+    let leaseClone = _.clone(lease);
+    delete leaseClone.id;
+    return this.apiService.createLease(buildingUnitId, leaseClone);
   }
 
   updateLease(lease: Lease): Observable<Lease> {
     let id = lease.id;
-    let leaseClone = LeasesService.cloneLease(lease);
-    delete lease.id;
+    let leaseClone = _.clone(lease);
+    delete leaseClone.id;
     return this.apiService.updateLease(id, leaseClone);
-  }
-
-  static cloneLease(lease: Lease): Lease {
-    return _.clone(lease);
   }
 }

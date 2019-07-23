@@ -9,19 +9,19 @@
     <div class="p-grid p-justify-center">
       <div class="p-col-4">
         <label for="lease-start-date">Start date</label>
-        <p-calendar id="lease-start-date" [(ngModel)]="lease && lease.startDate" [required]="true" [disabled]="disabled"></p-calendar>
+        <p-calendar id="lease-start-date" [(ngModel)]="_lease && _lease._startDate" [required]="true" [disabled]="disabled"></p-calendar>
       </div>
       <div class="p-col-4">
         <label for="lease-end-date">End date</label>
-        <p-calendar id="lease-end-date" [(ngModel)]="lease && lease.endDate" [required]="true" [disabled]="disabled"></p-calendar>
+        <p-calendar id="lease-end-date" [(ngModel)]="_lease && _lease._endDate" [required]="true" [disabled]="disabled"></p-calendar>
       </div>
       <div class="p-col-4">
         <label for="monthly-rent">Monthly rent</label>
-        <input id="monthly-rent" pInputText [(ngModel)]="lease && lease.monthlyRent"/>
+        <input id="monthly-rent" pInputText [(ngModel)]="_lease && _lease.monthlyRent"/>
       </div>
       <div class="p-col-12 p-md-12">
         <label for="tenant">Tenant</label>
-        <tenant-select id="tenant" (onSelect)="selectTenant($event)" (onUnSelect)="unSelectTenant($event)"></tenant-select>
+        <tenant-select id="tenant" [selected]="selectedTenant" (onSelect)="selectTenant($event)" (onUnSelect)="unSelectTenant($event)"></tenant-select>
       </div>
       <div class="p-col-12 p-md-6">
         <p-button *ngIf="isNew()" label="Create" icon="pi pi-check" class="ui-button-danger" (onClick)="submit()"></p-button>
