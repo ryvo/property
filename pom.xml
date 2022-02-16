@@ -14,7 +14,7 @@
     <description>Property manager parent project</description>
 
     <properties>
-        <postgresql.version>42.2.5</postgresql.version>
+        <postgresql.version>42.3.3</postgresql.version>
         <querydsl.version>4.2.1</querydsl.version>
         <slf4j-log4j12.version>1.7.26</slf4j-log4j12.version>
     </properties>
